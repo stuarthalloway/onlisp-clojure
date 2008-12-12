@@ -1,0 +1,20 @@
+ONLISP-CLOJURE
+----------------------
+A port of selected examples from _On Lisp_ to Clojure.
+The purpose of this port is to explore the intersection between
+Lisp and Clojure's signature features: access to the JVM and a 
+functional programming style base on immutable collections.
+
+
+WHAT YOU SHOULD DO FIRST
+------------------------
+Read _On Lisp_. It's great. Buy a copy.
+http://www.paulgraham.com/onlisp.html
+
+THEN...
+----------------------
+Get yourself some Clojure (http://clojure.org) and take 
+a look at the code in this project.
+
+Stuart Halloway
+stu@thinkrelevance.com
