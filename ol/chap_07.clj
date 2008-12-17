@@ -1,8 +1,7 @@
 (ns ol.chap-07)
 
-; boring, since dosycn and ref-set are not special forms
-(defn nil! [ref]
-  (dosync (ref-set ref nil)))
+(defn nil! [at]
+  (swap! at (fn [_] nil)))
 
 ; to have a simple macro that does something
 (defmacro defnil [name]

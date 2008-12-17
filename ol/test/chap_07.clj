@@ -1,15 +1,14 @@
 (ns ol.test.chap-07
-  (:use fact ol.chap-07))
+  (:use fact ol.chap-07 ol.test.util))
 
-(defn refs [] [(ref :foo) (ref nil)])
 (def zeros [0])
 (def rand-neg-ints (filter neg? (rand-ints)))
 (def rand-pos-ints (filter pos? (rand-ints)))
 (defn die [] (throw (Exception. "This argument should not be evaluated")))
 
-(fact "nil! nils out a reference"
-  [ref (refs)]
-  (= nil (nil! ref)))
+(fact "nil! nils out an atom"
+  [at [(atom :foo) (atom nil)]]
+  (= nil (nil! at)))
 
 (fact "nif evals and returns its third arg for numeric zero"
   [z zeros]
@@ -38,11 +37,6 @@
 (fact "when-bind does nothing and returns nil if test is false"
   []
   (= nil (when-bind [a (= 1 2)] (die))))
-
-(defmacro throws? [cl & body]
-  `(try ~@body
-     (throw (RuntimeException. (str "Expected " ~cl)))
-     (catch ~cl e# e#)))
 
 (fact "when-bind blows up when passed a form legal for binding but not evaluation"
   []
