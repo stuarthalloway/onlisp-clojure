@@ -2,28 +2,28 @@
 
 ; wrong, but fails fast. Clojure puts _limit_ into a namespace
 ; Clojure basically forces you to gensym to get the code to run.
-(defmacro bad-for [[var start stop] & body]
-  `(loop [~var ~start limit ~stop]
-     (if (< ~var ~stop)
+(defmacro bad-for [[idx start stop] & body]
+  `(loop [~idx ~start limit ~stop]
+     (if (< ~idx ~stop)
        (do
 	 ~@body
-	 (recur (inc ~var) limit)))))
+	 (recur (inc ~idx) limit)))))
 
 ; going out of my way to introduce evil capture
-(defmacro evil-for [[var start stop] & body]
-  `(loop [~var ~start ~'limit ~stop]
-     (if (< ~var ~'limit)
+(defmacro evil-for [[idx start stop] & body]
+  `(loop [~idx ~start ~'limit ~stop]
+     (if (< ~idx ~'limit)
        (do
 	 ~@body
-	 (recur (inc ~var) ~'limit)))))
+	 (recur (inc ~idx) ~'limit)))))
 
 ; when in doubt, append #
-(defmacro good-for [[var start stop] & body]
-  `(loop [~var ~start limit# ~stop]
-     (if (< ~var limit#)
+(defmacro good-for [[idx start stop] & body]
+  `(loop [~idx ~start limit# ~stop]
+     (if (< ~idx limit#)
        (do
 	 ~@body
-	 (recur (inc ~var) limit#)))))
+	 (recur (inc ~idx) limit#)))))
 
 ; works. ol.chap-09/w and w never collide
 (def w (ref []))
